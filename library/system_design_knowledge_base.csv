@@ -1,0 +1,791 @@
+material_design_section,system_design_aspect,property,constraint,relation,content
+Foundations,Structure,Group,soft,Accessibility Hierarchy,"Types of feedback
+
+Visual feedback (such as labels, colors, and icons) and touch feedback show users what is available in the UI.
+
+Navigation
+
+Navigation can have clear task flows with minimal steps, easy-to-locate controls and clear labeling. Focus control, or the ability to control keyboard and reading focus, can be implemented for frequently used tasks.
+
+Every added button, image, and line of text increases the complexity of a UI. You can simplify how your UI is understood by using:
+
+Clearly visible elements
+Sufficient contrast and size
+A clear hierarchy of importance
+Key information that is discernable at a glance
+To convey an item’s relative level of importance:
+
+Place important actions at the top or bottom of the screen (reachable with shortcuts)
+Place related items of a similar hierarchy next to each other"
+Foundations,Layout,Clickable,soft,Accessibility Touch and pointer target sizes,"Touch targets are the parts of the screen that respond to user input, extending beyond the visual bounds of an element. For example, an icon may appear to be 24 x 24dp, but the padding surrounding it comprises the full 48 x 48dp touch target. 
+For most platforms, consider making touch targets at least 48 x 48dp. A touch target this size results in a physical size of about 9mm, regardless of screen size. The recommended target size for touchscreen elements is 7-10mm. It may be appropriate to use larger touch targets to accommodate a larger spectrum of users.
+Note: iOS recommends 44 x 44dp targets. 
+Pointer targets are similar to touch targets, but are implemented by motion-tracking pointer devices such as a mouse or a stylus. "
+Foundations,Layout,Spacing,soft,Accessibility Target spacing,"In most cases, targets separated by 8dp of space or more promote balanced information density and usability."
+Foundations,Label,Label,hard,Accessibility Alternative text,"Do,Alt text helps translate a visual UI into a text-based UI. Alt text is a short label (up to 125 characters) in the code that describes an image for users who are unable to see them. Since alt text is only for images, there is no need to add “image of” or “picture of” to the alt text. A screen reader will read the alt text aloud in place of the image. 
+Use alt text to convey what the image is showing in an informative, short phrase.
+"
+Foundations,Label,Label,hard,Accessibility Captions,"Do,Captions are the text that appear below an asset. They explain an asset’s contextual information–the who, what, when, and where. Both sighted and screen reader users rely on captions for descriptions of assets.
+Captions are the text that appear below an asset. They explain an asset’s contextual information–the who, what, when, and where. Both sighted and screen reader users rely on captions for descriptions of assets.
+"
+Foundations,Color,Color,soft,Accessibility Essential and non-essential elements,"Informative images have essential and non-essential elements. Essential information should have a 3:1 color contrast ratio for large text and 4.5:1 for small text.
+The illustration contains both essential and non-essential information:Essential: The text meets all contrast ratios and size requirementsEssential: An illustrative visual representation of the instructions that follows color contrast guidelinesNon-essential: The decorative elements create background and personality for the illustration. They do not relay information and do not have to meet contrast requirements."
+Foundations,Implement,Platform,hard,Accessibility Implementing accessibility,"Do,Use native elements, such as the standard platform dialog"
+Foundations,Implement,Platform,hard,Accessibility Implementing accessibility,"Don’t,Be wary of using non-standard elements, such as a non-standard platform dialog to perform a standard dialog task. It requires extra testing to work well with assistive technology."
+Foundations,Color,Color,soft,Accessibility Contrast ratios,"
+Color contrast is important for users to distinguish various text and non-text elements. Higher contrast makes the imagery easier to see, while low-contrast images may be difficult for some users to differentiate in bright or low light conditions, such as on a very sunny day or at night.
+Contrast ratios represent how different one color is from another color, commonly written as 1:1 or 21:1. The greater the difference is between the two numbers in the ratio, the greater the difference in relative luminance between the colors. The contrast ratio between a color and its background ranges from 1-21 based on its luminance (the intensity of light emitted) according to the World Wide Web Consortium (W3C).
+The W3C recommends the following contrast ratios for body text and image text
+| Text type                                                             | Color contrast ratio         |
+| --------------------------------------------------------------------- | ---------------------------- |
+| Large text (at 14 pt bold/18 pt regular and up) and graphics`` | 3:1 against the background   |
+| Small text``                                                   | 4.5:1 against the background |
+"
+Foundations,Color,Color,soft,Accessibility Clustering elements,"
+The contrast of the button container color against the background color falls below 3:1, failing the 3:1 contrast ratio standard
+The container color exceeds 3:1 contrast ratio against the background color
+Standalone components, such as FABs, don’t benefit from a 3:1 contrast ratio between the container and background colors
+When placing components together in a cluster, use components or types of components that each achieve at least 3:1 contrast between themselves and the background.
+"
+Foundations,Text,Text,soft,Accessibility Text resizing,"Most components behave the same when text is resized:
+
+Text and line height scale up proportionally, multiplied by scale value
+Padding remains constant at 1x the default size
+Spacing between elements in a component remain constant at 1x the default size
+
+Button text displayed at 1x, 1.3x, and 2x scales. All have top and bottom padding of 8dp.
+
+Button text displayed at 1x, 1.3x, and 2x scales. All have left and right padding of 24dp.
+
+When text resizing isn't controlled by the device OS, offer multipliers such as 1.5x or 2x to allow users to increase the text size. Using multipliers to scale text can result in values with decimals, but this approach is more feasible for implementation.
+
+To calculate a font's size using multipliers, take the default font size (density = 0) and multiply it by the scale value.
+
+Button with label text at 1x and 2x scale.
+
+Components that don't include text, like progress indicators, checkboxes, or radio buttons, aren't affected by text resizing.
+"
+Foundations,Text,Text,hard,Accessibility Text resizing,"Don’t,Icon button with the icon shown at 1x scale and incorrectly at 2x scale."
+Foundations,Text,Text,soft,Text resizing Text Increase container size,"Resizing containers can prevent text from overlapping, clipping, or truncating.
+Consider how text might reflow in a way that allows the eye to follow the end of one line to the beginning of the following line"
+Foundations,Text,Text,soft,Accessibility Text resizing Reflow the layout,"Consider reflowing the layout, especially when components grow very long. To accommodate larger text, components can be stacked on top of one another, rather than fixed side-by-side."
+Foundations,Text,Text,soft,Accessibility Text resizing Enable content to scroll,"When long strings of enlarged text don’t fit on one screen, consider adding a scrollbar to provide access to more content.
+Vertical scrolling is preferable to horizontal. Users should only be asked to scroll in one direction, rather than both vertically and horizontally."
+Foundations,Text,Text,soft,Accessibility Text resizing Use long press tooltips to provide enlarged labels,"Some components, such as app bars and navigation bars, position text in spaces with stricter space and character limits. In these situations, you can add a tooltip to display enlarged content in the UI.
+In this case, the text size in the component remains displayed at 1x while the scaled up text is displayed in a tooltip on long press.
+Tooltips are the best choice for displaying enlarged text in: Top app bar
+Navigation bar
+Navigation rail
+Tabs, when fixed to the top of a screen and don’t move off-screen upon scrolling
+Tooltip on navigation rail displays scaled up label text."
+Foundations,Text,Text,hard,Accessibility Text resizing Use long press tooltips to provide enlarged labels,"Do,Scale up text in an adjacent tooltip to maintain space in a UI for consuming content."
+Foundations,Structure,Group,soft,Accessibility Structure Web Landmarks,"For web only: Landmarks and headings help assistive-technology users orient themselves to a web page and allow for easy navigation and traversal across large sections of a document or page. 
+
+By classifying and labeling sections of a page, structural information that is conveyed visually through layout design can also be represented in code.
+Landmarks are large blocks of content that establish the high-level structure of your layout. They're a set of ARIA roles that provide easy access to, and important meaning for, common content areas of a web page. 
+
+There are eight landmark roles: navigation, search, main, banner, complementary, contentinfo, region, and form. 
+
+The eight landmark roles in the W3C ARIA guidelines include:
+
+Navigation: Contains lists of navigation links (there can be multiple, in which case you should differentiate in label)
+Search: A search field 
+Main: The main content area as defined by UX. There should be only one.
+Banner: Typically the header; content repeated from page to page, often contains navigation and toolbars. There should be only one.
+Complementary: A sidebar or aside to main content that can stand alone without the main content
+Contentinfo: Typically the footer; contains information describing the site and its content (for example,  copyright). There should be only one.
+Region: Content regions are important content blocks. They can be nested inside the “main” landmark. Regions should be labeled with names that make the purpose of that region clear. 
+Form: Takes and stores user info"
+Foundations,Label,Label,soft,Accessibility Structure Add accessibility labels,"Add clear and specific labels to any landmark roles that appear multiple times (regions or navigation typically). This will help users differentiate information. 
+
+Labels should be added to all regions, as well as any landmark where a label will enhance meaning. For example, explaining the contents or purpose of a sidebar. 
+
+Don't repeat the landmark role within a label."
+Foundations,Structure,Group,soft,Accessibility Structure Define headings,"Assistive technology users often navigate web pages with the help of headings. They create a clear hierarchy to help users navigate and take action.
+
+Identify headings based on content hierarchy, rather than visual styling
+Headings should not skip a level, for example, don't go from H2 to H4 without using an H3 
+Map content on your pages to headings (H1–H6) in sequential order based on the hierarchy of your content
+A single H1 for the page title is recommended"
+Foundations,Flow,Clickable,soft,Accessibility Define initial focus and component-level focus,"Focus refers to which control is currently the active target of user interactions, such as mouse clicks or keyboard taps. Generally, the tab key moves focus between interactive elements. 
+
+Define the initial focus when a user loads a screen, as well as initial focus for components with multiple interactive elements, like a complex card or a dialog.
+Focus is particularly important when an element is activated by the user or the user changes context. 
+
+For example, when a dialog is triggered, check for the following:
+
+Focus is set to the dialog component, likely to a specific interactive element within the dialog such as a text input field or edit button
+When the user closes or cancels the dialog, focus returns to the interactive element that initiated the action"
+Foundations,Flow,Clickable,soft,Accessibility Define any atypical key traversal through the page and components,"Tab typically moves focus between interactive elements and is often used as primary navigation. Tab + Shift reverses direction.
+Arrow keys are typically used to navigate within components (for example, moving between cells in a form or traversing items in a menu.)
+Enter activates a link or button, or sends a form when a form item has focus."
+Foundations,Label,Label,soft,Accessibility Label elements,"Accessibility labels assist users who cannot rely on a product's visual interface. Thoughtful labels help make the text-based experience as usable as the visual experience. Labels should concisely describe an element's content, purpose and behavior. "
+Foundations,Label,Label,hard,Accessibility Add labels for meaningful images and interactive elements,"Do,Labels should be concise, descriptive, and convey the content and context of the image. Labels should be concise, descriptive, and convey the content and context of the image."
+Foundations,Label,Label,hard,Accessibility Add labels for meaningful images and interactive elements,"Don’t, Do not use an element role (button, menu, etc.) in your label. This identifier is automatically added when the element is assigned its proper role, typically by a developer."
+Foundations,Label,Label,hard,Accessibility Assign a role to interactive elements,"Don't,Don't include the control type in the label. Screen readers automatically add the control, so you’d be having it repeat (for example,ex. “Got it button button”)"
+Foundations,Label,Label,soft,Accessibility Assign a role to interactive elements,"ARIA roles apply to web apps and specify how to increase the accessibility of web pages on top of HTML. 
+
+For web, assign ARIA roles for all interactive elements 
+For non-web, assign roles based on your design system components (button, slider, menu, etc.)
+Assign ARIA roles (web) or component type (mobile) to communicate desired interaction patterns into engineering action. Note that some visual elements may look the same, but are intended to behave differently. 
+
+Defining an interactive element's category by assigning it a role helps users of assistive technology establish expectations for how to interact with that element and anticipate what is likely to happen upon interaction."
+Foundations,Text,Text,hard,Content alt text,"Do, Write alternative text for images to provide context to screen reader users."
+Foundations,Text,Text,hard,Content alt text,"Don't,Avoid leaving the automatically generated file number as alt text."
+Foundations,Text,Text,hard,Content Focus on the meaning of the image,"Do,Describe the context and overall meaning, rather than focusing on the details. For example, in a shopping app, focus on the item for sale rather than the things around it.
+Alt text can also help improve SEO, but its primary purpose should be to make sites usable for all.
+Focus on the important part of the image."
+Foundations,Text,Text,hard,Content Focus on the meaning of the image,"Don't,Avoid detailed descriptions that don’t contribute to the image’s meaning."
+Foundations,Text,Text,hard,Content Keep it short,"Do,Write brief alt text."
+Foundations,Text,Text,hard,Content Keep it short,"Don't,Don’t write more than 125 characters of alt text. "
+Foundations,Text,Text,hard,Content Don’t start alt text with image of,"Do,Describe the image, rather than the format."
+Foundations,Text,Text,hard,Content Don’t start alt text with image of,"Don't,Avoid writing “image of. The screen reader will announce it’s an image."
+Foundations,Text,Text,hard,Content Context matters,"Do,Alt text should always relate to the context."
+Foundations,Text,Text,hard,Content Context matters,"Do,Change alt text for an image depending on where it’s used."
+Foundations,Text,Text,hard,Content Alt text is subjective,"Do,Make alt text consistent with the caption."
+Foundations,Text,Text,hard,Content Alt text is subjective,"Don’t,Don’t ignore the caption. Information in alt text should correspond to adjacent text."
+Foundations,Text,Text,hard,Content Alt text is subjective,"Do,Focus on the meaning of the image."
+Foundations,Text,Text,hard,Content Alt text is subjective,"Do,Use alt text to reinforce ideas in the caption."
+Foundations,Text,Text,hard,Content Alt text is subjective,"Don’t,Don’t write alt with details that aren’t relevant to the context of the image."
+Foundations,Text,Text,hard,Content Captions should benefit all users,"Do,Capture the meaning of the image in a few words."
+Foundations,Text,Text,hard,Content Captions should benefit all users,"Don’t,Don’t repeat the caption as the alt text"
+Foundations,Text,Text,hard,Content Types of imagery,"Caution, Be careful when using alt text that describes the type of image.
+Occasionally it benefits users to name the type of image. This can include:
+Chart
+Infographic
+Map
+Graph
+Screenshot
+Headshot
+Diagram"
+Foundations,Text,Text,hard,Content Charts and graphs,"Do,Capture the meaning of the chart."
+Foundations,Text,Text,hard,Content Charts and graphs,"Don’t,Avoid copying data points."
+Foundations,Text,Text,soft,Content Charts and graphs,"For a chart with a lot of data points, write alt text for the most important ones. For example, on a stock price graph users would want to know the prices for open, close, high and low.  
+
+Ensure that the concepts shown in the chart or graph are explained fully in the body copy. 
+
+A general formula would be: [chart type] of [data type] where [reason for showing the chart]."
+Foundations,Text,Text,hard,Content Word choice Use global examples & explain local references,"Do,Use generalized, global examples. Most countries and cultures have holidays."
+Foundations,Text,Text,hard,Content Word choice Use global examples & explain local references,"Don’t,Don’t call out a specific country or culture’s holiday"
+Foundations,Text,Text,hard,Content Word choice Use global examples & explain local references,"Caution,
+Help translators understand the context by adding message descriptions
+If it doesn’t make sense to use a global example, explain the reference in the message description so the translator can substitute a locale-specific example. Some instances where local references should be called out include:
+
+Locations
+Names (common first names and nicknames)
+Currencies
+Temperatures
+Date formats
+Providers (internet and cable)"
+Foundations,Text,Text,hard,Content Word choice Avoid abbreviations,"Do,Use clear names to refer to things"
+Foundations,Text,Text,hard,Content Word choice Avoid abbreviations,"Don’t,Avoid abbreviations"
+Foundations,Text,Text,hard,Content Word choice Clarify pronouns,"Do,Using nouns instead of, or in addition to, pronouns can help clarify future and past user actions"
+Foundations,Text,Text,hard,Content Word choice Clarify pronouns,"Don’t,Avoid using pronouns when it’s unclear what nouns they’re referring to, especially when explaining user actions"
+Foundations,Text,Text,hard,Content Word choice Clarify “this” and “that”,"Do,Make sure it’s clear who text is referring to"
+Foundations,Text,Text,hard,Content Word choice Clarify “this” and “that”,"Don’t,Avoid using “this” and “that”"
+Foundations,Text,Text,hard,Content Word choice Avoid idiomatic colloquial and polite expressions,"Do,Clear, everyday language can be used in an expressive and whimsical way when paired with imagery"
+Foundations,Text,Text,hard,Content Word choice Avoid idiomatic colloquial and polite expressions,"Don’t,Idiomatic phrases can be difficult for everyone to understand and for translators to localize"
+Foundations,Text,Text,hard,Content Word choice Reduce technical jargon,"Do,Plain language is easier for everyone to understand"
+Foundations,Text,Text,hard,Content Word choice Reduce technical jargon,"Don’t,Confusing language makes it difficult for people to understand the actions they’re taking"
+Foundations,Text,Text,soft,Content Word choice Clarify ambiguities,"Some words have multiple meanings. For example, “traffic,” “filter,” and “change” can all be used as either nouns or verbs. Avoid using both meanings of the word in the same string or body of text. If a word has the potential to be confusing, be sure to provide as much context as possible in the message description so the translation will be accurate."
+Foundations,Text,Text,hard,Content Style guide Explain consequences,"Do,Tell users what will happen if they take an action and how they can undo it"
+Foundations,Text,Text,hard,Content Style guide Explain consequences,"Don’t,Don’t misrepresent consequences or try to influence a user’s decision"
+Foundations,Text,Text,soft,Content Style guide Use scannable words and formats,"People scan UI text in search of the most meaningful content to them. Help by using specific titles and headings that clearly describe a topic. When users are skimming or hurrying through an action, this organization helps them avoid mistakes and unintentional actions. People scan UI text in search of the most meaningful content to them. Help by using specific titles and headings that clearly describe a topic. When users are skimming or hurrying through an action, this organization helps them avoid mistakes and unintentional actions."
+Foundations,Text,Text,hard,Content Style guide Use sentence case,"Do,Capitalize the first word of a sentence or phrase"
+Foundations,Text,Text,hard,Content Style guide Use sentence case,"Don’t,Capitalize the first word of a sentence or phrase"
+Foundations,Text,Text,hard,Content Style guide Use abbreviations sparingly,"Do,When an abbreviation is appropriate, make sure it’s formatted and spelled correctly to avoid confusion"
+Foundations,Text,Text,hard,Content Style guide Use abbreviations sparingly,"Don’t,Avoid using abbreviations when there’s space to spell out a word"
+Foundations,Text,Text,hard,Content Style guide Use second person pronouns (“you”),"Do,Write from the user’s point of view to help them take action"
+Foundations,Text,Text,hard,Content Style guide Use second person pronouns (“you”),"Don’t,Avoid writing that sounds impersonal and robotic"
+Foundations,Text,Text,hard,Content Style guide Don’t combine first and second person,"Do,Write from a user’s point of view by emphasizing their perspective with “you” and “your”"
+Foundations,Text,Text,hard,Content Style guide Don’t combine first and second person,"Don’t,Don’t mix different forms of address in the same screen. Instead, use “you” and “your” or get rid of the pronoun."
+Foundations,Text,Text,hard,Content Style guide Use caution with “I” and “we”,"Don’t,Don’t use first person pronouns to speak for the voice of Google"
+Foundations,Text,Text,hard,Content Style guide Use caution with “I” and “we”,"Don’t,Avoid using first person pronouns. Write from the user’s point of view by using second person pronouns or removing pronouns altogether."
+Foundations,Text,Text,hard,Content Style guide Use caution with “I” and “we”,"Do,First person pronouns can help users understand when they’re making impactful decisions"
+Foundations,Text,Text,hard,Content Style guide Use caution with “I” and “we”,"Caution,Use caution with “we” or “our.” Even when these pronouns represent real people employed by Google, seeing first person pronouns in UI text can be confusing or jarring."
+Foundations,Text,Text,hard,Content Style guide Skip periods and unnecessary punctuation,"Do,Omit punctuation on single-line sentences"
+Foundations,Text,Text,hard,Content Style guide Skip periods and unnecessary punctuation,"Don’t,Avoid using periods to end single sentences"
+Foundations,Text,Text,soft,Content Style guide Skip periods and unnecessary punctuation,"To help readers scan text, avoid using periods and other unnecessary punctuation. 
+Avoid using periods to end single sentences, particularly in:
+
+Labels
+Tooltip text
+Bulleted lists
+Dialog body text
+Hyperlinked text
+Use periods on:
+
+Multiple sentences
+Long or complex sentences, if it suits the context
+Any sentence followed by a link"
+Foundations,Text,Text,hard,Content Style guide Use contractions,"Do,Avoid spelling out words that can be contractions"
+Foundations,Text,Text,hard,Content Style guide Use contractions,"Don’t,Phrases that aren’t contracted can feel stiff or overly formal"
+Foundations,Text,Text,hard,Content Style guide Use serial commas,"Do,Use a serial comma in lists of three or more items"
+Foundations,Text,Text,hard,Content Style guide Use serial commas,"Don’t,Don’t skip serial commas before “and”"
+Foundations,Text,Text,hard,Content Style guide Use exclamation points sparingly,"Do,Exclamation marks can be used to emphasize celebratory moments"
+Foundations,Text,Text,hard,Content Style guide Use exclamation points sparingly,"Don’t,Avoid using exclamation marks for empty states and common tasks. Save it for bigger accomplishments."
+Foundations,Text,Text,hard,Content Style guide Use ellipses sparingly,"Do,Ellipses show an action in progress"
+Foundations,Text,Text,hard,Content Style guide Use ellipses sparingly,"Don’t,Don’t use ellipses in buttons or menu items"
+Foundations,Text,Text,hard,Content Style guide Use parentheses to define terms,"Do,Use parentheses to define terms and jargon"
+Foundations,Text,Text,hard,Content Style guide Use parentheses to define terms,"Don’t,Don’t use parentheses to add extra thoughts. If information is needed, include it in the sentence without parentheses for easier scanning and improved comprehension."
+Foundations,Text,Text,hard,Content Style guide Skip ampersands in body text,"Do,Ampersands can be used in headlines"
+Foundations,Text,Text,hard,Content Style guide Skip ampersands in body text,"Don’t,Avoid ampersands in email subject lines"
+Foundations,Text,Text,soft,Content Style guide Use dashes with caution,"Dashes and hyphens can interrupt a sentence and lead to a fragmented experience, so they should be used with caution. There are three kinds of dashes:
+
+Em dash: —
+En dash: –
+Hyphen: -
+
+Em dashes are best avoided in UX writing, as they indicate a break in the flow of a sentence that could be simplified using a comma, period, or new sentence. 
+
+Use an en dash without spaces to indicate a range, such as 9 AM–Noon."
+Foundations,Text,Text,soft,Content Style guide Use hyphens with care,"Hyphens can help readers better understand how words relate to each other by binding closely related words. They can also be used to represent negative numbers, such as -100. Spaces should never be used surrounding hyphens.
+
+Refer to the Associated Press (AP) style guidelines if you are unsure whether an adjective or noun phrase needs a hyphen.
+
+Rule	Examples	Why
+Hyphenate adjective phrases
+Case-by-case basis
+Best-in-class performance
+Once-in-a-lifetime opportunity	When multiple words are used together as an adjective, they should be hyphenated. However, common, easily understood adjective phrases don't need to be, such as 'cell phone' or 'chocolate chip cookie'.
+Cell phone
+Chocolate chip cookie	Except in the case of proper nouns and easily understood adjective phrases, which don't need to be
+Hyphenate noun phrases	
+
+A noun phrase is two or more words acting as a noun. These phrases are hyphenated in certain cases:
+Sign-off
+Drive-through
+Go-ahead	Hyphenate a noun phrase if it contains a verb followed by an adverb
+Higher-up
+Most-read	Hyphenate an adjective phrase that is functioning as a noun
+Jack-of-all-trades
+Stick-in-the-mud	Some noun phrases, especially long or complicated ones, are always hyphenated"
+Foundations,Layout,Group,soft,Layout Grouping,"Grouping is a method for connecting related elements that share a context, such as an image grouped with a caption. It visually relates elements and establishes boundaries to differentiate unrelated elements. By placing a caption under an image this composition shows an explicit group.
+Explicit grouping uses visual boundaries such as outlines, dividers, and shadows to group related elements in an enclosed area. Explicit grouping can also indicate that an item is interactive, such as list items contained between dividers, or a card displaying an image and its caption.
+Implicit grouping uses close proximity and open space (rather than lines and shadows) to group related items. For example, a headline closely followed by a subhead and thumbnail image are implicitly grouped together by proximity and separated from other headline-subhead-thumbnail groups by open space."
+Foundations,Layout,Spacing,soft,Layout Margins,"Margins are the spaces between the edge of a window area and the elements within that window area.
+
+Margin widths are defined using fixed or scaling values for each window size class. To better adapt to the window, the margin width can change at different breakpoints. Wider margins are more appropriate for larger screens, as they create more open space around the perimeter of content.
+
+See margin measurements for each window class: compact, medium, expanded, large, and extra-large.
+
+Screen highlighting vertical blue margin on left side of screen"
+Foundations,Layout,Spacing,soft,Layout Spacers,"A spacer refers to the space between two panes in a layout. Spacers measure 24dp wide."
+Foundations,Layout,Spacing,soft,Layout Padding,"Padding refers to the space between UI elements. Padding can be measured vertically and horizontally and does not need to span the entire height or width of a layout. Padding is measured in increments of 4dp."
+Foundations,Layout,Spacing,hard,Layout Information density,"Do,Consider using higher density information design when users need to scan lots of information on screen"
+Foundations,Layout,Spacing,hard,Layout Information density,"Caution,Avoid reducing selectable targets to less than 48x48dp"
+Foundations,Layout,Spacing,hard,Layout Information density,"Don't,Don’t increase density in UIs that involve focused tasks, such as interacting with a dropdown menu or picker as it reduces usability by limiting selectable space."
+Foundations,Layout,Spacing,hard,Layout Information density,"Don't,Don't increase the density in components that alert the user of changes, such as snackbars or dialogs."
+Foundations,Layout,Spacing,soft,Layout Density scale,"The density scale allows you to control the internal spacing of individual components when needed.
+
+The density scale is numbered, starting at 0 for a component’s default density. The scale moves to negative numbers (-1, -2, -3) as space decreases, creating higher density. Each increment represents a decrease in the height of a component by 4dp.
+
+Three buttons, with densities  of +1, ), and -1
+Buttons are offered in multiple densities to best fit a needs of a design
+
+When multiple elements are stacked vertically within a component, use 4dp increments to separate them. Center the grouped element within the component container.
+
+Stacked element showing 20 dp between label and input
+The measurement between the label and input is 20dp
+
+Parent container showing label above input
+The label and input are centered within their parent container
+
+Don’t apply density to interaction targets. They should remain a minimum of 48x48dp, even if their visual element (such as an icon) is smaller.
+
+Settings button is 24 by 24 dp, but has interaction target of 48 x 48 dp.
+The interaction target for an icon button can be larger than its icon, as long as it meets the 48x48dp minimum size.
+
+Button with height of 36 dp and interaction target of 48 dp"
+Foundations,Layout,Group,soft,Layout Navigation region,"The navigation region holds primary navigation components and elements such as:
+
+Navigation drawer
+Navigation rail
+Navigation bar
+Elements in this section help people navigate between destinations in an app or to access important actions.
+
+Navigation drawer, navigation rail, and navigation bar each shown on a separate screen."
+Foundations,Layout,Group,soft,Layout Body region,"The body region contains most of the content in an app, including:
+
+Images
+Text
+Lists
+Cards
+Buttons
+App bar
+Search bar
+Content in the body region is grouped into one or more panes."
+Foundations,Layout,Group,soft,Layout Panes,"A pane refers to the grouping of content within the body region. All app content is inside one or more panes.
+
+The arrangement and relative size of the layout regions and panes will vary depending on the device’s window size class:
+
+Compact: 1 pane
+Medium: 1 (recommended) or 2 panes
+Expanded: 1 or 2 panes (recommended)
+Large: 1 or 2 panes (recommended)
+Extra-large: 1 to 2 panes (recommended) with standard side sheet serving as a potential additional 3rd pane.
+Two paned screen layout.
+First pane
+Second pane
+
+Pane types
+
+Fixed: fixed width (360 dp)
+Flexible: responsive to available space, can grow and shrink
+Fixed and flexible panes of a screen.
+Fixed pane
+Flexible pane
+
+A pane is different from a window, which refers to the frame containing an app. Multi-window views are a system UI feature used to display more than one app simultaneously.
+
+Multi-window support guide for Android
+
+Side-by-side windows with single taskbar below.
+Two windows shown next to one another with a taskbar underneath. 
+
+Layouts
+Single-pane layouts use one flexible pane.
+
+A mobile screen with a single pane inside a window.
+A singular pane extending from one edge to another inside a window. 
+
+Two-pane layouts typically use one fixed and one flexible pane, which can appear in whatever order is best for the content.
+
+Fixed and flexible panes arranged 2 different ways.
+Fixed pane
+Flexible pane
+
+An alternative two-pane layout, called split-pane, uses two flexible panes equal to 50% of the screen width. This layout best supports foldable devices.
+
+Two flexible panes layout.
+First pane
+Second pane
+
+Number of panes	Pane type
+1	Flexible
+2	1 fixed, 1 flexible
+2 (split-pane)	2 flexible"
+Foundations,Layout,Group,soft,Layout App bars,"Panes can include a top app bar and bottom app bar.
+
+Screen layout with app bar inside left pane.
+An example of an app bar inside a pane.
+
+Any nesting actions within the top app bar should be hidden or revealed based on available width.
+
+Top app bar of a compact window on a mobile device shows 2 items.
+A compact window with two actions revealed.
+
+Top app bar of  expanded window  shows 5 items.
+A expanded window class with five items revealed.
+
+When layouts transition from one to two panes, avoid shifting elements between panes.
+Columns
+Content in a pane can be displayed in multiple columns to segment and align content. 
+
+Columns are exclusive to a pane and are not used at the window level.
+
+A single pane containing 3 columns."
+Foundations,Layout,Group,hard,Layout App bars,"Don’t,Don’t move elements to different UI objects when switching between window classes."
+Foundations,Layout,Platform,soft,Layout Display cutout,"A display cutout is an area on some devices that extends into the display surface. It allows for an edge-to-edge experience while providing space for important sensors on the screen of the device. 
+
+Applications can extend around display cutouts or other features, but some parts of the UI might be obscured.
+
+Content safe area shown in portrait and in landscape mode."
+Foundations,Layout,Platform,soft,Layout Foldable devices,"Fold
+The fold of a foldable device divides the screen into two portions, either horizontally or vertically. The fold can be a flexible area of the screen or, on dual-screen devices, a hinge that separates two displays.
+
+A flexible fold is barely visible, although some users may feel a tactile difference on the screen surface. Content can flow over the fold fairly easily.
+
+Center fold of a foldable device layout.
+Folds are typically found in the center of the device screen and can present a seamless experience.
+
+On devices with a physical hinge, designing the screen as two distinct sections (separate window areas or panes) allows a composition to work well across the hinge and screens.
+
+Center fold on a foldable device with a physical hinge.
+A physical hinge separates two parts. There is no display hardware in this region.
+
+Device state
+Foldable devices can have several physical states: folded, open flat, and tabletop.
+
+Folded
+The folded state can include a front screen, which often fits in the compact window size class, just like a mobile phone in portrait orientation.
+
+Compact window of a folded device.
+The front screen of a foldable device
+
+Open flat
+An open flat state refers to the fully opened screen, which usually increases the window size class to medium or expanded. An open device can be used in landscape or portrait orientations.
+
+Open portrait state of a mobile device.
+In an open portrait state, the longer device edge is vertical while the shorter edge is horizontal.
+
+Open landscape state of a mobile device.
+In an open landscape state, the longer device edge is horizontal while the vertical edge is shorter.
+
+Tabletop
+Tabletop refers to a half-opened state forming a rough 90 degree angle, with one half of the device resting on a surface. This posture resembles a laptop.
+
+UI controls near the fold can be difficult for users to access, and text overlaying the fold can be hard to read.
+
+Tabletop state of a mobile device showing camera ;ems  on the vertical plane.
+If camera hardware is present, a tabletop device is best positioned on a side without any protruding hardware elements."
+Foundations,Layout,Platform,soft,Layout App continuity,"When running on a foldable device, an app can transition from one screen to another automatically. After the transition, the app should resume in the same state and location, and the current task should continue seamlessly.
+
+A news app in compact mode compared to the open landscape state where the news app expands with a new column next to the compact news feed.
+A news app shows a feed in a compact and expanded window class when a foldable device switches device state."
+Foundations,Layout,Platform,soft,Layout Scrolling and multiple panes,"Depending on how your app uses panes, the scroll behavior of a folded design may change in the unfolded design. 
+
+If you expand a pane, you can decide whether the whole window will scroll together or if each side (each pane) scrolls independently. 
+
+A foldable device screen in open landscape mode with a single pane showing vertical scroll arrows.
+A single pane can scroll its inside content vertically and horizontally.
+
+If your design has multiple panes, each pane can operate as an independently scrollable area.
+
+A foldable device screen in open portrait mode with double panes each with a vertical scroll arrow.
+Multiple panes can scroll inside content independently of one another."
+Foundations,Layout,Platform,soft,Layout Multi-window mode,"Multi-window mode is an Android system feature for displaying multiple apps on the same screen. This can be especially useful for multi-tasking, or workflows that depend on comparing information.
+
+Note: This concept should not be confused with using multiple panes to display content from a single app. For more on that, see: Panes.
+
+2 apps appear side-by-side with a task bar below spanning the width of the screen.
+Screen displaying an email app and a contacts app in multi-window mode"
+Foundations,Layout,Platform,soft,Layout User needs,"The ways that windows are created, arranged, and adjusted should feel straightforward for all users and across any window size class. Methods for seamless window management include:
+Apply smooth transitions as described in motion guidance
+Ensure that users can create multiple windows easily and move between them as needed
+Keep mental models and interaction patterns simple so that users aren’t required to think about which mode is appropriate for each task
+Design and implement window dynamics consistently across variations in foldable hardware, including those with a hinge that separates two displays"
+Foundations,Layout,Platform,soft,Layout Window creation and behavior,"Android provides several ways for users to create a multi-window view."
+Foundations,Layout,Platform,soft,Layout Taskbar,"The taskbar provides a launching point for pinned and suggested apps to easily become a separate window. 
+To create a new window, a user selects and drags an app from the taskbar and moves the app icon to indicate where the new window should be displayed.
+The taskbar is positioned at the bottom of a screen.
+Android taskbar"
+Foundations,Layout,Platform,soft,Layout Context menu,"Users can also create multiple windows through the overview by the app context menu.
+
+2 apps appear side-by-side with a task bar below spanning the width of the screen.
+Multi-window mode can have vertical positioning
+
+2 apps are stacked in landscape mode with a task bar below spanning the width of the screen.
+Multi-window mode can have horizontal positioning"
+Foundations,Layout,Platform,soft,Layout Adjusting window sizes,"By default multiple windows are created as a 50/50 side-by-side split.
+
+The windows can be adjusted further to 1:3 or 2:3 proportions. These ratios provide a primary and secondary window dynamic, offering greater flexibility and allowing focus on one application as needed.
+
+When in a multi-window mode, the available screen area often changes from medium or expanded window class to compact. Layouts should adapt accordingly.
+
+2 apps appear side-by-side with the left-side app using two-thirds of the screen, and the right app one-third.
+The screen handle can be dragged and released to create the desired window ratio. The handle automatically adjusts to the closest snap point."
+Styles,Typography,Text,hard,Font Adjustable axes,"Be careful of using excessively lighter weight type for body text. Lower resolution displays can struggle with rendering more delicate typography, especially at small sizes. Instead, consider lighter weights at larger font sizes, such as display type."
+Styles,Typography,Text,hard,Font Adjustable axes,"Excessive weight at smaller sizes may affect legibility"
+Styles,Typography,Text,hard,Font Width,"Do,A thinner width can allow for more characters to fit at small sizes, such as in a label"
+Styles,Typography,Text,hard,Font Width,"Don’t,Styles,Typography,Text,hard,Font Width, A thinner width can allow for more characters to fit at small sizes, such as in a label"
+Styles,Typography,Text,hard,Font Optical size,"Do,Use an optical size that matches your type size"
+Styles,Typography,Text,hard,Font Optical size,"Don’t,Don’t use large optical type sizes at small sizes. Instead use a smaller optical size, if available."
+Styles,Typography,Text,soft,Font Applying type Headline,"Headlines are best-suited for short, high-emphasis text on smaller screens. These styles can be good for marking primary passages of text or important regions of content.
+Headlines can also make use of expressive typefaces, provided that appropriate line height and letter spacing is also integrated to maintain readability.
+Example expressive headline typeface on phone screen
+Expressive typefaces can be used for headlines styles as well
+The name Ana Russo in headline style in a contact card
+Headline style used for short text on a small screen
+Headline style set above body text
+Dialog using a headline style"
+Styles,Typography,Text,soft,Font Applying type Title,"Titles are smaller than headline styles, and should be used for medium-emphasis text that remains relatively short. For example, consider using title styles to divide secondary passages of text or secondary regions of content.
+
+For titles, use caution when using expressive fonts, including display, handwritten, and script styles.
+
+An article card using title style for the article title
+A news article title using the title style to capture attention
+Top app bar using title style for the contact name, Aki Aro
+Top app bar using title style
+
+Title style stating ‘Top News’ above headlines
+Example of title style applied to a category header: Top News"
+Styles,Typography,Text,soft,Font Applying type Body,"Body styles are used for longer passages of text in your app. 
+
+Use typefaces intended for body styles, which are readable at smaller sizes and can be comfortably read in longer passages.
+
+Avoid expressive or decorative fonts for body text because these can be harder to read at small sizes.
+
+Body-style typeface
+Body styles must be readable for long passages
+
+ Body style text in  article
+Body style used throughout an article about pesto
+
+Three stacked examples of body style in app setup flow
+Example of body style used throughout a setup flow"
+Styles,Typography,Text,soft,Font Applying type Body,"Label styles are smaller, utilitarian styles, used for things like the text inside components or for very small text in the content body, such as captions. 
+
+Buttons, for example, use the label large style.
+
+ Several label-style buttons on device screen.
+Label styles should enable quick reading at small sizes, such as in buttons
+Music player timecode featuring label style
+A music player using label style for the timecode
+
+Five labels set horizontally across the navigation bar
+A navigation bar using label style for the destination text"
+Styles,Typography,Text,soft,Font Typesetting Using padding and bounding boxes,"Use this method for web products, and iOS products, where applicable. Note that some design tools also use bounding boxes for typesetting, but their methods vary and will need to be reconciled with the engineering implementation.
+
+In web UIs, the line height and bounding box height are the same. Text is vertically centered within the bounding box, following the “half-leading” behavior established by CSS.
+
+The vertical position of the text isn’t controlled directly, but through the combination of the bounding box and font metrics.
+
+Diagram of bounding box equaling line height
+The bounding box height is defined by the line height specified, with equal space placed above and below the text
+
+Padding is the space between UI elements, such as between an image and a bounding box, or between the inner edge of the bounding box and the text.
+
+Diagram of 20 dp padding above text
+The padding surrounding the text bounding box
+
+Specify the distance of UI elements from fixed reference points, such as the container edge. For the web, automate this calculation using Sass or CSS."
+Styles,Typography,Text,hard,Font Typesetting Using padding and bounding boxes,"Do,Use line-height, padding, and container measurements for setting typography on the web and iOS"
+Styles,Typography,Text,soft,Font Typesetting Using padding and bounding boxes,"Vertical alignment using padding and bounding boxes:
+
+Line height
+Measure the height of the bounding box
+Centering
+Ensure equal top and bottom padding around the inner edge of the bounding box by using center align
+Spacing
+Use the height of the bounding box, and top and bottom padding to determine spacing
+Diagram of using padding and bounding boxes to measure line height, alignment, and spacing."
+Styles,Typography,Text,soft,Font Typesetting Using the baseline,"Vertical alignment using the baseline:
+Line height
+Measure distance from the text baseline of one line to the text baseline of the next line
+Centering
+Specify center alignment as a reference instead of measuring the distance to the text baseline
+Spacing
+Use the distance from a reference point to the text baseline"
+Styles,Typography,Text,hard,Font Typesetting Using the baseline,"Do,Android screens rely on distance to baselines for spacing"
+Styles,Typography,Text,soft,Font Ensuring readability,"Line height
+
+Line height is the space between each line of text and is directly connected to type size.
+
+Material’s type tokens are optimized for intended size and use.
+
+An example of larger type with a line height ratio of 1.2
+For larger type legibility using styles like title, headline, and display, we recommend a line height ratio of 1.2 times the type size
+
+An example of body type with a line height ratio of 1.5
+For smaller body copy using styles like body and label, we recommend a line height ratio around 1.5 times the type size. If your line height is too tight, you’ll undermine the flow of the text. Too loose, and the lines won’t feel cohesive.
+Tabular numbers 
+
+ Use tabular figures (also known as monospaced numbers) rather than proportional digits in tables or places where values may change often, such as clocks.
+
+Use monospaced tabular numbers to keep values optically aligned for better scanning.
+
+Vertical view showing the spacing variation in proportional numbers versus monospacing of tabular numbers
+Proportional numbers
+Monospaced tabular numbers
+Times displayed in tabular numbers
+Use tabular numbers to prevent layout shifting when values change, such as in a clock UI"
+Styles,Typography,Text,hard,Font Using Material Symbols with typography,"Do,Use the same size for your Material Symbols and text"
+Styles,Typography,Text,hard,Font Using Material Symbols with typography,"Don’t,Don’t mix the sizes of your symbol and text"
+Styles,Typography,Text,hard,Font Using Material Symbols with typography,"Do,Use the same weight for your symbol and text"
+Styles,Typography,Text,hard,Font Using Material Symbols with typography,"Don’tDon’t use the different weights for Material Symbols and text"
+Styles,Typography,Text,hard,Font Using Material Symbols with typography,"Do,Shift down the baseline of symbols to approximately 11.5% of the text size"
+Styles,Typography,Text,hard,Font Using Material Symbols with typography,"Don’t,Don’t use the same baseline for Material Symbols and text"
+Styles,Typography,Color,soft,Accessibility,"Color & contrast
+Support visual accessibility by choosing the appropriate color contrast between your product’s text and background. Contrast is the perceived difference between the lightness or darkness of two colors, and is quantified by a contrast ratio. Key contrast ratios indicate levels of contrast that are sufficient for accessibility. 
+
+Learn more about contrast and accessibility
+
+Text should achieve sufficient contrast between its color and that of its background. Sufficient contrast depends on the size of the text and the level of accessibility required. 
+
+Learn more about contrast requirements for text
+
+Large text should achieve a contrast ratio of 4.5:1 for AAA-level accessibility
+Small text should achieve a contrast ratio of 7:1 for AAA-level accessibility
+
+The default color for typography is on surface, although on surface variant is a strong alternative.
+
+Diagram showing the default color for text is 'on surface'.
+Default typography colors
+
+For hyperlinked text appearing on top of a surface color, use primary or tertiary.
+
+Hyperlinked text must also be underlined.
+
+Hyperlinks should be underlined and use primary or tertiary color"
+Styles,Elevation,Clickable,soft,Depicting elevation,"To successfully depict elevation, a surface must show:
+
+Surface edges, contrasting the surface from its surroundings
+Overlap with other surfaces, either at rest or in motion
+Distance from other surfaces
+3 images. The first shows a purple square overlapping a white square. The second shows a purple square overlapping another purple square but with shadows beneath the top square. The third shows a purple square overlapping a dark gray square"
+Styles,Elevation,Clickable,soft,Tonal difference,"Elevation, scrim, and tonal differences used to indicate separation.
+A FAB's elevation helps separate it from body content
+A scrim appears below a modal to communicate importance
+Tonal differences between a top app bar and body content indicate separate surfaces"
+Styles,Elevation,Clickable,hard,Tonal difference,"Do,Ensure floating elements have sufficient contrast with surfaces beneath"
+Styles,Elevation,Clickable,hard,Tonal difference,"Don't,Don't use colors with insufficient contrast. The relationship between surfaces must be clear."
+Styles,Elevation,Clickable,soft,Shadows,"Podcast app with each show displayed as a card separated from the background using small dark shadows
+Smaller, sharper shadows indicate a surface’s close proximity to the surface behind it
+
+Podcast app with each show displayed as a card separated from the background using more fuzzy and diffused shadows
+Larger, softer shadows express more distance between a surface and the one behind it
+
+When it comes to applying shadows, less is more. The fewer levels in your UI, the more power they have to direct attention and action."
+Styles,Elevation,Clickable,soft,When to use visible shadows,"Protect elements
+
+When a background is patterned or visually busy, the hairline style might not provide sufficient protection. In these cases, use elevation to separate and emphasize elements such as cards, chips, or buttons, as in the image below.
+
+Buttons with shadows separating them from a background image
+Interactive elements are emphasized with elevation
+
+Encourage interaction
+
+Elements can temporarily lift on focus, selection, or another kind of interaction, like swipe. A raised element can also lower when a higher element appears"
+Styles,Color,Color,hard,Pairing and layering colors,"Do,Pair and layer color roles as intended to ensure expected visual results and accessibility. In this example, the two buttons mapped with (1) primary, (2) on primary, (3) secondary container, and (4) on secondary container stay legible as the contrast level changes."
+Styles,Color,Color,hard,Pairing and layering colors,"Don't,Improper color mappings can produce unintended visual results and break accessibility. In this example, the two buttons mapped with (1) primary, (2) primary container, (3) secondary container, and (4) on surface become illegible as the contrast level changes."
+Styles,Color,Color,soft,Primary,"Use primary roles for the most prominent components across the UI, such as the FAB, high-emphasis buttons, and active states.
+
+Primary – High-emphasis fills, texts, and icons against surface
+
+On primary – Text and icons against primary
+
+Primary container – Standout fill color against surface, for key components like FAB
+
+On primary container – Text and icons against primary container"
+Styles,Color,Color,soft,Secondary,"Use secondary roles for less prominent components in the UI such as filter chips.
+
+There are four secondary roles:
+
+Secondary – Less prominent fills, text, and icons against surface
+
+On secondary – Text and icons against secondary
+
+Secondary container – Less prominent fill color against surface, for recessive components like tonal buttons
+
+On secondary container – Text and icons against secondary container
+4 color swatches: secondary, on secondary, secondary container, and on secondary container."
+Styles,Color,Color,soft,Tertiary,"Use tertiary roles for contrasting accents that balance primary and secondary colors or bring heightened attention to an element such as an input field. 
+
+There are four tertiary roles:
+
+Tertiary – Complementary fills, text, and icons against surface
+
+On tertiary – Text and icons against tertiary
+
+Tertiary container – Complementary container color against surface, for components like input fields
+
+On tertiary container – Text and icons against tertiary container
+The tertiary color roles can be applied at the designer's discretion. They're intended to support broader color expression."
+Styles,Color,Color,soft,Error,"Use error roles to communicate error states, such as an incorrect password entered into a text field.
+
+There are four error roles:
+
+Error – Attention-grabbing color against surface for fills, icons, and text, indicating urgency
+
+On error – Text and icons against error
+
+Error container – Attention-grabbing fill color against surface
+
+On error container – Text and icons against error container
+Error is an example of a static color (it doesn't change even in dynamic color schemes). Error color roles are made static by default with any dynamic color scheme."
+Styles,Color,Color,soft,Surface,"Use surface roles for more neutral backgrounds, and container colors for components like cards, sheets, and dialogs.
+
+There are three surface roles:
+
+Surface – Default color for backgrounds
+
+On surface – Text and icons against any surface color
+
+On surface variant – Lower-emphasis color for text and icons against any surface color
+3 color swatches: Surface, On surface and On surface variant.
+Surface and on surface roles in light theme
+
+There are also five surface container roles named based on their level of emphasis:
+
+Surface container lowest – Lowest-emphasis container color
+
+Surface container low – Low-emphasis container color
+
+Surface container – Default container color
+
+Surface container high – High-emphasis container color
+
+Surface container highest – Highest-emphasis container color
+Surface container is the default role, but the others are especially helpful for creating hierarchy and nested containers in layouts for expanded screens.
+
+4 color swatches in light and dark theme: Surface container lowest, Surface container low, Surface container, Surface container high and Surface container highest.
+The five surface container roles, shown in light and dark theme
+
+The most common combination of surface roles uses surface for a background area and surface container for a navigation area.
+
+Email app using Surface for the main background color and Surface Container for the navigation bar background
+Surface
+Surface container
+
+All color mappings – but especially surface colors – should remain the same for layout regions across window size classes. For example, the body area will use the surface color and the navigation area will use the surface container color on both mobile and tablet.
+
+Mobile and tablet screens both using Surface for main background and surface container for navigation background.
+Surface
+Surface container
+
+Depending on necessary hierarchy, feature area, and design logic, you can use add-on surface colors in larger window class sizes as long as colors are consistently applied.
+
+Mobile, foldable, and tablet screens showing how the body and navigation regions have the same color roles across window sizes.
+In this example, the body and navigation regions have the same color roles across window size classes (surface and surface container, respectively) with the addition of other surface container colors at larger sizes.
+
+By default, neutral-colored components such as navigation bars, menus, or dialogs are mapped to specific surface container roles, but these roles can be remapped by makers to suit user needs.
+
+Surface container low applied to an elevated button and card, surface container applied to the top and bottom bar, surface container high applied to the FAB and basic dialog, surface container highest applied to an input label and off switch.
+Default surface container roles applied to components:
+
+Surface container low
+Surface container 
+Surface container high
+Surface container highest"
+Styles,Color,Color,soft,Inverse colors,"Inverse roles are applied selectively to components to achieve colors that are the reverse of those in the surrounding UI, creating a contrasting effect.
+
+Inverse surface – Background fills for elements which contrast against surface
+
+Inverse on surface – Text and icons against inverse surface
+
+Inverse primary – Actionable elements, such as text buttons, against inverse surface
+3 color swatches: Inverse surface, inverse on surface and inverse primary roles.
+Inverse surface, inverse on surface, and inverse primary roles in the color scheme, shown in light theme
+
+Snackbar component using inverse surface for its background, inverse on surface for its text and inverse primary of its text button, shown in light theme
+A snackbar which uses:
+
+Inverse surface for its background
+Inverse on surface for its text
+Inverse primary for its text button"
+Styles,Color,Color,soft,Outline,"There are two outline colors to be used against surface:
+
+Outline – Important boundaries, such as a text field outline
+
+Outline variant – Decorative elements, such as dividers
+2 color swatches: Outline and outline variant
+Outline and outline variant roles in the color scheme, shown in light theme
+
+Diagram comparing used of outline and outline variant.
+A text field which uses outline for its container border
+A list item which uses outline variant for its divider line"
+Styles,Color,Color,hard,Outline,"Don’t,Don’t use the outline color for dividers since they have different contrast requirements. Instead, use outline variant."
+Styles,Color,Color,hard,Outline,"Don’t,Don’t use the outline color for components that contain multiple elements, such as cards. Instead, use outline variant."
+Styles,Color,Color,hard,Outline,"Don’t,Don’t use the outline variant color for clustered elements like chips, or other UI elements that are in close proximity to each other. Instead, use outline or another color providing 3:1 contrast with the surface color."
+Styles,Color,Color,hard,Outline,"Don’t,Don’t use the outline variant color to create visual hierarchy or define the visual boundary of targets. Instead, use the outline color or another color providing 3:1 contrast with the surface color."
+Styles,Color,Color,soft,Fixed accent colors,"Primary fixed, secondary fixed, and tertiary fixed are fill colors used against surface. These colors maintain the same tone in light and dark themes, as opposed to regular container colors, which change in tone between these themes. The fixed color role may be used instead of the equivalent container role in situations where such fixed behavior is desired.
+
+The primary fixed dim, secondary fixed dim, and tertiary fixed dim roles provide a stronger, more emphasized tone relative to the equivalent fixed color. They may be used where a deeper color but the same fixed behavior is desired.
+
+6 color swatches: Primary, secondary and tertiary fixed swatches, along with their darker Dim counterparts, shown in both light and dark theme.
+Fixed and fixed dim color roles for the primary, secondary, and tertiary color groups, shown in both light and dark themes. Note how the colors stay the same between themes.
+
+FAB in light and dark theme, using the primary fixed role for its container fill color.
+A FAB which uses primary fixed (1) for its container fill color, shown in light and dark themes. Note how the container color stays the same between themes.
+
+FAB in light and dark theme, using the primary container role for its container fill color.
+For comparison, a FAB which uses primary container (2) for its container fill color, shown in light and dark themes. Note how the container color changes tone between themes.
+
+2 email app screens using primary fixed and primary fixed dim.
+Examples of fixed and fixed dim colors in use:
+
+Primary fixed for a FAB container color
+Primary fixed dim for an icon button container"
+Styles,Color,Color,hard,Fixed accent colors,"Don’t,Similar to container roles, fixed colors do not pass minimum contrast requirements such as 3:1 for non-text contrast and 4.5:1 for text contrast. They should not be applied to elements requiring such contrast."
+Styles,Color,Color,hard,Fixed accent colors,"Do,Use the primary, secondary, and tertiary roles for accent colors where minimum contrast is required"

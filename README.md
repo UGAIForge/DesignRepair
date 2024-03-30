@@ -14,3 +14,20 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+## setup envs
+<!-- conda create --name fkmd python=3.11
+conda activate fkmd
+pip install -r requirements.txt -->
+Run the backend (I use Poetry for package management - `pip install poetry` if you don't have it):
+
+```bash
+cd backend
+poetry install
+poetry shell
+poetry run uvicorn main:app --reload --port 7001
+```
+
+## 2 add openai key and ROOT_DIR
+create file ".envs"
+OPENAI_API_KEY="keyhere"
