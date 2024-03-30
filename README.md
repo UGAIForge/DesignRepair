@@ -51,7 +51,7 @@ Finally, we implement a knowledge-driven, LLM-based repair method enhanced with 
 ### example5 before vs after
 <div align="center">
     <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp5before.gif" width="300">
-    <img src="hhttps://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp5after.gif" width="300">
+    <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp5after.gif" width="300">
 </div>
 
 ## How to use
