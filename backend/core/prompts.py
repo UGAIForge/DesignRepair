@@ -100,6 +100,10 @@ Here are the guidelines you must follow, we name it "hard constraints",
 REMEMBER THIS IS MANDATORY, ONCE YOU FIND A BAD DESIGN NOT FOLLOWING THE GUIDELINE, YOU MUST FIX IT. FIND AS MANY BAD DESIGN AS POSSIBLE.
 '''{hard_constraints}'''
 
+Here are the general guidelines you can use, we name it "soft constraints",
+REMEMBER THIS IS NOT MANDATORY, REGARDED AS OPTIONAL.
+'''{soft_constraints}'''
+
 ####
 Use the above instructions to analyze the supplied files, and provide detailed suggestions to fix all the bad design.
 To suggest changes to a file you MUST return the bad design code snippet, reference_components_name, detailed reference guidelines, and fix code suggestion. in the json format.
@@ -109,4 +113,4 @@ To suggest changes to a file you MUST return the bad design code snippet, refere
 find as many bad design as possible.
 """
 
-# Don't easily change the size of the buttons, unless it has very serious accessibility issues.
+# We will release full details once the paper is published. Thank you for your interest.
