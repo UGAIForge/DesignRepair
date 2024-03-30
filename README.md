@@ -23,8 +23,10 @@ Finally, we implement a knowledge-driven, LLM-based repair method enhanced with 
 
 ## Here are some compare results of our DesignRepair
 
+
 ### example1 before vs after
 <div align="center">
+    <span> example1 before vs after </span>
     <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp1before.gif" width="300">
     <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp1after.gif" width="300">
 </div>
