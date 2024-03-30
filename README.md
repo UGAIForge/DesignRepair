@@ -13,7 +13,7 @@ Our extensive evaluations validated the efficacy and utility of our approach, de
 
 ### Approach
 
-![Framework Overview of DesignRepair](https://github.com/DesignRepair2024/DesignRepair2024/blob/master/image/overview.png)
+![Framework Overview of DesignRepair](https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/overview.png)
 
 The overview illustrates the overview of our approach, DesignRepair, which consists of three phases, namely, an offline knowledge base construction, online page extraction and knowledge-driven repair phases. 
 
