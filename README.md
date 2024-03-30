@@ -23,6 +23,36 @@ Finally, we implement a knowledge-driven, LLM-based repair method enhanced with 
 
 ## Here are some compare results of our DesignRepair
 
+### example1 before vs after
+<div align="center">
+    <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp1before.gif" width="300">
+    <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp1after.gif" width="300">
+</div>
+
+### example2 before vs after
+<div align="center">
+    <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp2before.gif" width="300">
+    <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp2after.gif" width="300">
+</div>
+
+### example3 before vs after
+<div align="center">
+    <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp3before.gif" width="300">
+    <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp3after.gif" width="300">
+</div>
+
+### example4 before vs after
+<div align="center">
+    <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp4before.gif" width="300">
+    <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp4after.gif" width="300">
+</div>
+
+### example5 before vs after
+<div align="center">
+    <img src="https://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp5before.gif" width="300">
+    <img src="hhttps://github.com/DesignRepair2024/DesignRepair2024/blob/main/image/exp5after.gif" width="300">
+</div>
+
 ## How to use
 
 ### Installation
