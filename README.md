@@ -1,33 +1,41 @@
-### Hi there 👋
 
-<!--
-**DesignRepair2024/DesignRepair2024** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
-Here are some ideas to get you started:
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
 
-## setup envs
-<!-- conda create --name fkmd python=3.11
-conda activate fkmd
-pip install -r requirements.txt -->
-Run the backend (I use Poetry for package management - `pip install poetry` if you don't have it):
+# DesignRepair2024
 
-```bash
-cd backend
-poetry install
-poetry shell
-poetry run uvicorn main:app --reload --port 7001
-```
+## Description
 
-## 2 add openai key and ROOT_DIR
+A brief description of what this project does and who it's for.
+
+## Installation
+
+Follow these steps to install and setup the project:
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/DesignRepair2024/DesignRepair2024.git
+    ```
+
+2. Navigate to the project directory:
+    ```bash
+    cd DesignRepair2024
+    ```
+
+3. Install the required packages:
+    ```bash
+    cd backend
+    poetry install
+    poetry shell
+    ```
+
+## add openai key 
 create file ".envs"
 OPENAI_API_KEY="keyhere"
+
+## Usage
+
+To run the project, execute the `test.py` script:
+
+```bash
+python test.py
