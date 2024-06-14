@@ -8,12 +8,28 @@
 
 | Section of Pipeline | File Path | Info |
 | --- | --- | --- |
-| Component Knowledge Base | .\library\component\knowledge_base.json | Extracted from https://m3.material.io/components of the Material Design official documents, it includes 24 component types, and their corresponding guidelines  |
-| System Knowledge Base | .\library\component\system_base.csv | Extracted from https://m3.material.io/foundations and https://m3.material.io/styles of the Material Design official documents, and formed into 7 types of Property Groups: Group, Clickable, Spacing, Platform, Label, Text, and Color. The mapping relationship can be visualized in Neo4j using .\scripts\create_knowledge_graph.md. |
-| Prompts | .\backend\core\prompts.py | All prompts, including P_comp_extra, P_map_kb, P_individual, P_all |
-|  Knowledge Base Extraction  | .\scripts\prepare_kb_dump.py | Document processing script, structured into knowledge database |
+| Component Knowledge Base | `.\library\component\knowledge_base.json` | Extracted from https://m3.material.io/components of the Material Design official documents, it includes 24 component types, and their corresponding guidelines  |
+| System Knowledge Base | `.\library\component\system_base.csv` | Extracted from https://m3.material.io/foundations and https://m3.material.io/styles of the Material Design official documents, and formed into 7 types of Property Groups: Group, Clickable, Spacing, Platform, Label, Text, and Color. The mapping relationship can be visualized in Neo4j using .\scripts\create_knowledge_graph.md. |
+| Prompts | `.\backend\core\prompts.py` | All prompts, including P_comp_extra, P_map_kb, P_individual, P_all |
+|  Knowledge Base Extraction  | `.\scripts\prepare_kb_dump.py` | Document processing script, structured into knowledge database |
+
+### Prompts Detail 
+
+The prompts' content is located in the file `.\backend\core\prompts.py`. 
+
+The following table outlines the prompt names in the paper, their corresponding variable names in the code, and their respective information:
+
+| Prompt Name in Paper | Variable Name in Code | Information |
+| --- | --- | --- |
+| P_comp_extra | get_related_components_prompt_web_page | For step B1, extract related components type list |
+| P_map_kb | get_related_components_prompt_library | For step C1, map page components list to library component name list |
+| P_individual_components | components_analysis_content | For step C2, analyze components-level design issues |
+| P_individual_property | property_analysis_content | For step C2, analyze system-level design issues |
+| P_all | regenerate_file_content | For step C3, summarize and analyze all design issues and generate fixed page code |
+
 
 ### Vercel V0 project
+
 
 
 
@@ -41,20 +57,22 @@ Follow these steps to install and setup the project:
     ```
 
 ### add openai key 
-create file ".envs"
-OPENAI_API_KEY="keyhere"
+    create file `.envs`
+
+    OPENAI_API_KEY="keyhere"
 
 ### Usage
 
-Update the content of text.py to configure your local environment to run the code:
-    ```
+Update the content of `text.py` to configure your local environment to run the code:
+
+```python
     if __name__ == "__main__":
         file_dir = r"..\examples" # Your frontend code file folder
         file_name = "example1.tsx" # Your frontend code file
 
         # page to be tested
         pageurl = "http://localhost:3000" # Your rendered page url
-    ```
+```
 
 To run the project, execute the `test.py` script:
 
