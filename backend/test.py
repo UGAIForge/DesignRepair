@@ -93,15 +93,15 @@ def load_system_level_guidelines(file_path):
 
 
 if __name__ == "__main__":
-    file_dir = r"..\examples"
-    file_name = "example1.tsx"
-
-    comp_guidelines_path = r"..\library\components_knowledge_base.json"
-    system_level_guidelines_path = r"..\library\system_design_knowledge_base.csv"
+    file_dir = r"..\examples" # Your frontend code file folder
+    file_name = "example1.tsx" # Your frontend code file
 
     # page to be tested
-    pageurl = "http://localhost:3000"
-    
+    pageurl = "http://localhost:3000" # Your rendered page url
+
+    comp_guidelines_path = r"..\library\components_knowledge_base.json" # component guideline file
+    system_level_guidelines_path = r"..\library\system_design_knowledge_base.csv" # system level guideline file
+
     ctx = process_file(file_dir, file_name)
     
     # make log folder

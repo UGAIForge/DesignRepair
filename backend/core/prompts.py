@@ -17,9 +17,12 @@ get_related_components_prompt_library = """
 Multiple component guidelines can be used while checking the component in order to help find the mistake and improve.
 You have the following list of library components: 
 '''{components_list}'''
-- to be continue -
-"""
+    -Map web page components you got, to the corresponding library components. save it in a list {"components"}.
 
+    Notice, the web page component name and the library component name do not correspond exactly. 
+    Tip: You can decompose components or combine components to find the corresponding components in the library.
+    Please try your best to find it.
+"""
 
 components_soft_analysis_content = """
 
@@ -28,7 +31,8 @@ Here is the current content of the files you need to analyze:
 '''{file_content}'''
 
 ####
-- to be continue -
+Multiple component guidelines can be used while checking the component in order to help find the mistake and improve.
+[Anatomy, Behavior, Placement, Responsive layout, Usage] are the most common component guidelines you need to check.
 
 Here are the related guidelines:
 
@@ -46,7 +50,8 @@ Here is the current content of the files you need to analyze:
 '''{file_content}'''
 
 ####
-- to be continue -
+Multiple component guidelines can be used while checking the component in order to help find the mistake and improve.
+[Anatomy, Behavior, Placement, Responsive layout, Usage] are the most common component guidelines you need to check.
 
 Here are the related guidelines:
 
@@ -78,7 +83,18 @@ Here is the current content of the files you need to modify:
 Here are the bad design code snippet, detailed reference guidelines, and fix code suggestion.
 '''{suggestions}'''
 
-- to be continue -
+- There may be conflicts between bad design code snippets. Please try your best to merge the conflicts to give the best improvement results.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Repeat elements as needed. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each news item -->" or bad things will happen.
+
+Remember, You are an expert frontend developer, and frontend designer. 
+Only focusing on the most important aspect to improve.
+You MUST make the color, layout in beatiful design, and readability!!!
+
+Return only the full code you improved. 
+Do not include markdown "```" or "```jsx" at the start or end.
+Do not include markdown "```" or "```jsx" at the start or end.
+Do not include markdown "```" or "```jsx" at the start or end.
 """
 
 property_analysis_content = """
