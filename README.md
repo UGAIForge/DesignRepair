@@ -9,9 +9,9 @@
 | Section of Pipeline | File Path | Info |
 | --- | --- | --- |
 | Component Knowledge Base | [`.\library\component\knowledge_base.json`](https://github.com/DesignRepair2024/DesignRepair2024/blob/main/library/component_knowledge_base.json) | Extracted from https://m3.material.io/components of the Material Design official documents, it includes 24 component types, and their corresponding guidelines  |
-| System Knowledge Base | `.\library\component\system_base.csv` | Extracted from https://m3.material.io/foundations and https://m3.material.io/styles of the Material Design official documents, and formed into 7 types of Property Groups: Group, Clickable, Spacing, Platform, Label, Text, and Color. The mapping relationship can be visualized in Neo4j using .\scripts\create_knowledge_graph.md. |
-| Prompts | `.\backend\core\prompts.py` | All prompts, including P_comp_extra, P_map_kb, P_individual, P_all |
-|  Knowledge Base Extraction  | `.\scripts\prepare_kb_dump.py` | Document processing script, structured into knowledge database |
+| System Knowledge Base | [`.\library\component\system_base.csv`](https://github.com/DesignRepair2024/DesignRepair2024/blob/main/library/system_design_knowledge_base.csv) | Extracted from https://m3.material.io/foundations and https://m3.material.io/styles of the Material Design official documents, and formed into 7 types of Property Groups: Group, Clickable, Spacing, Platform, Label, Text, and Color. The mapping relationship can be visualized in Neo4j using .\scripts\create_knowledge_graph.md. |
+| Prompts | [`.\backend\core\prompts.py`](https://github.com/DesignRepair2024/DesignRepair2024/blob/main/backend/core/prompts.py) | All prompts, including P_comp_extra, P_map_kb, P_individual, P_all |
+|  Knowledge Base Extraction  | [`.\scripts\prepare_kb_dump.py`](https://github.com/DesignRepair2024/DesignRepair2024/blob/main/scripts/prepare_kb_dump.py) | Document processing script, structured into knowledge database |
 
 ### Prompts Detail 
 
