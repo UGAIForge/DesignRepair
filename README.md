@@ -28,7 +28,7 @@ The following table outlines the prompt names in the paper, their corresponding 
 | P_all | regenerate_file_content | For step C3, summarize and analyze all design issues and generate fixed page code |
 
 
-### Vercel V0 project
+### Vercel's V0 projects
 
 | ID | url |
 | --- | --- |
@@ -53,6 +53,17 @@ The following table outlines the prompt names in the paper, their corresponding 
 | 19 | https://v0.dev/t/rRBlufM |
 | 20 | https://v0.dev/t/VT395Yf4lhX |
 
+
+### Github projects
+
+| ID | url |
+| --- | --- |
+| 1 | https://github.com/cypress-io/cypress-realworld-app |
+| 2 | https://github.com/gothinkster/react-redux-realworld-example-app |
+| 3 | https://github.com/jgudo/ecommerce-react?tab=readme-ov-file |
+| 4 | https://github.com/oldboyxx/jira_clone |
+| 5 | https://github.com/HospitalRun/hospitalrun-frontend |
+| 6 | https://github.com/bbc/simorgh |
 
 ## Configuration
 
