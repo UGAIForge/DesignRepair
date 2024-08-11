@@ -21,11 +21,11 @@ The following table outlines the prompt names in the paper, their corresponding 
 
 | Prompt Name in Paper | Variable Name in Code | Information |
 | --- | --- | --- |
-| P_comp_extra | get_related_components_prompt_web_page | For step B1, extract related components type list |
+| P_comp_extra | get_related_components_prompt_web_page_simpler, get_related_components_prompt_web_page_complex  | For step B1, extract related components type list |
 | P_map_kb | get_related_components_prompt_library | For step C1, map page components list to library component name list |
 | P_individual_components | components_analysis_content | For step C2, analyze components-level design issues |
 | P_individual_property | property_analysis_content | For step C2, analyze system-level design issues |
-| P_all | regenerate_file_content | For step C3, summarize and analyze all design issues and generate fixed page code |
+| P_all | regenerate_file_content or regenerate_file_content_multi | For step C3, summarize and analyze all design issues and generate fixed page code |
 
 
 ### Vercel's V0 projects
@@ -110,6 +110,12 @@ To run the project, execute the `test.py` script:
 
 ```bash
 python test.py
+```
+
+To test multiple files simultaneously, execute the `test_multi.py` script:
+
+```bash
+python test_multi.py
 ```
 
 ### Abstract 
