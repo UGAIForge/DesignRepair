@@ -5,6 +5,7 @@ from playwright.sync_api import Playwright, expect, sync_playwright
 
 import os
 import json
+import time
 from pydantic import BaseModel
 from typing import Optional, List
 from core.llm import stream_openai_response
@@ -12,6 +13,7 @@ from core.prompts import analysis_system
 from core.prompts import property_analysis_content
 
 class AnalysisProperty(BaseModel):
+    bad_design_code_filename: str
     bad_design_code: str
     detailed_reference_from_guidelines: str
     suggestion_fix_code: str
@@ -37,7 +39,7 @@ async def get_response(prompt_messages, functions_schema=None, temperature=0.0):
     )
     return completion
 
-async def load_page(playwright, pageurl=None):
+async def load_page(playwright, pageurl=None, width = None, height = None):
     
     browser = await playwright.chromium.launch(
         traces_dir=None,
@@ -46,6 +48,10 @@ async def load_page(playwright, pageurl=None):
             "--disable-blink-features=AutomationControlled",
         ])
     page = await browser.new_page()
+
+    if width and height:
+        await page.set_viewport_size({"width": width, "height": height})
+
     if pageurl:
         await page.goto(pageurl)
     else:
@@ -711,6 +717,7 @@ async def analysis_groups(ctx, high_level_guidelines, pageurl):
     async with async_playwright() as playwright:
         # playwright load page
         page = await load_page(playwright, pageurl)
+        # time.sleep(30)
 
         property_results = {}
 
@@ -751,7 +758,7 @@ async def analysis_groups(ctx, high_level_guidelines, pageurl):
         property_results["Spacing"] = spacing_properties
         
         # 3 import related guidelines
-        for property in ["Group", "Clickable", "Spacing", "Platform","Label","Text","Color"]:
+        for property in ["Group", "Clickable", "Spacing", "Platform","Label","Text","Color","Icon"]:
             if property in high_level_guidelines and property in property_results and len(property_results[property]) > 0:
 
                 with open(log_file, "a") as file:
@@ -782,7 +789,7 @@ async def analysis_groups(ctx, high_level_guidelines, pageurl):
                 res = {new_key: res_content}
                 result_data.append(res)
 
-            elif property == "Group": # or property == "Platform":
+            elif property == "Group" or property == "Icon": # or property == "Platform":
                 # 4 analysis and repair
                 analysis_property_prompt, property_schema = assemble_analysis_property_prompt(ctx.file_content, high_level_guidelines[property], property, ["analyze code directly"])
                 completion = await get_response(analysis_property_prompt, property_schema)

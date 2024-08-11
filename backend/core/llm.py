@@ -4,6 +4,8 @@ from openai.types.chat import ChatCompletionMessageParam, ChatCompletionChunk
 
 MODEL_GPT_4_VISION = "gpt-4-vision-preview"
 MODEL_GPT_4 = "gpt-4-1106-preview"
+MODEL_GPT_4o = "gpt-4o-2024-05-13"
+MODEL_GPT_4_TURBO = "gpt-4-turbo-2024-04-09"
 
 async def stream_openai_response(
     messages: List[ChatCompletionMessageParam],
@@ -12,10 +14,12 @@ async def stream_openai_response(
     functions: List[dict] | None,
     base_url: str | None,
     callback: Callable[[str], Awaitable[None]],
+    model: str | None = None,
 ) -> str:
     client = AsyncOpenAI(api_key=api_key, base_url=base_url)
 
-    model = MODEL_GPT_4
+    if model is None:
+        model = MODEL_GPT_4
 
     # Base parameters
     params = {"model": model, "messages": messages, "stream": True, "timeout": 600, "temperature": temperature}

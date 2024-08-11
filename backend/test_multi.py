@@ -6,8 +6,8 @@ import asyncio
 import csv
 from core.analysis_components import analysis_components
 from core.analysis_groups import analysis_groups
-from core.analysis_utils import repair_to_full_code
-
+from core.analysis_utils import repair_to_full_code, repair_to_full_code_multi
+import datetime
 
 
 class FileContext(BaseModel):
@@ -47,6 +47,42 @@ def process_file(file_dir, file_name, root_directory=None, example=None):
     return ctx
 
 
+def process_file_multi(file_dir, file_name_list, testname, root_directory=None, example=None):
+    """
+    processes files
+    """
+    file_content = ""
+    for file_name in file_name_list:
+        file_path = os.path.join(file_dir, file_name)
+        with open(file_path, "r") as file:
+            file_content_single = file.read()
+            file_content += file_name + ":\n"
+            file_content += file_content_single
+            file_content += "\n"
+
+    example_content = None
+    if example:
+        example_path = os.path.join(root_directory, "./" + example)
+        try:
+            with open(example_path, "r") as example_file:
+                example_content = example_file.read()
+        except FileNotFoundError:
+            print(f"Could not find example file at {example_path}")
+            return
+
+    now = datetime.datetime.now()
+    timestamp = now.strftime("%Y%m%d_%H%M%S")
+    folder_name = f"log/{timestamp}_{testname}"
+
+    ctx = FileContext(
+        file_name= folder_name,
+        load_files = str(file_name_list),
+        file_dir=file_dir,
+        file_content=file_content,
+        root_directory=root_directory,
+        example_content=example_content,
+    )
+    return ctx
 
 def load_component_guidelines(file_path):
     with open(file_path, "r") as f:
@@ -94,7 +130,8 @@ def load_system_level_guidelines(file_path):
 
 if __name__ == "__main__":
     file_dir = r"..\examples" # Your frontend code file folder
-    file_name = "example1.tsx" # Your frontend code file
+    file_name_list = ["example1.tsx"] # Your frontend code file
+    testname = file_name_list[0].split(".")[0]
 
     # page to be tested
     pageurl = "http://localhost:3000" # Your rendered page url
@@ -102,24 +139,21 @@ if __name__ == "__main__":
     comp_guidelines_path = r"..\library\components_knowledge_base.json" # component guideline file
     system_level_guidelines_path = r"..\library\system_design_knowledge_base.csv" # system level guideline file
 
-    ctx = process_file(file_dir, file_name)
+    ctx = process_file_multi(file_dir, file_name_list, testname)
     
     # make log folder
-    folder_name = ctx.file_name.split(".")[0]
-    if not os.path.exists(folder_name):
-        os.mkdir(folder_name)
+    if not os.path.exists(ctx.file_name):
+        os.makedirs(ctx.file_name)
     
     # a.components detect and repair
     comp_guidelines = load_component_guidelines(comp_guidelines_path)
     comp_suggestions = asyncio.run(analysis_components(ctx, comp_guidelines))
-    asyncio.run(repair_to_full_code(ctx, comp_suggestions, "", folder_name, 'comp_'))
 
     # b.groups detect and repair
     system_level_guidelines = load_system_level_guidelines(system_level_guidelines_path)
     property_suggestions = asyncio.run(analysis_groups(ctx, system_level_guidelines, pageurl))
-    asyncio.run(repair_to_full_code(ctx, "", property_suggestions, folder_name, 'property_'))
 
     # c.repair
-    asyncio.run(repair_to_full_code(ctx, comp_suggestions, property_suggestions, folder_name, ''))
+    asyncio.run(repair_to_full_code_multi(ctx, comp_suggestions, property_suggestions, ctx.file_name))
 
     

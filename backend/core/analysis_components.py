@@ -11,7 +11,7 @@ from typing import Optional, List
 
 # from core.approximate_costs import approximate_costs
 from core.prompts import analysis_system
-from core.prompts import get_related_components_prompt_web_page
+from core.prompts import get_related_components_prompt_web_page, get_related_components_prompt_web_page_simpler, get_related_components_prompt_web_page_complex
 from core.prompts import get_related_components_prompt_library
 from core.prompts import components_analysis_content
 from core.analysis_utils import get_response
@@ -26,6 +26,7 @@ class ComponentSchema(BaseModel):
     components: List[str]
 
 class AnalysisComponent(BaseModel):
+    bad_design_code_filename: str
     bad_design_code: str
     detailed_reference_from_guidelines: str
     suggestion_fix_code: str
@@ -68,7 +69,7 @@ or collide with another element",
 }'''
 
 # TODO - Test segment code into chunks, and for each chunk find the relevant components in the library
-def assemble_get_web_components_prompt(file_content):
+def assemble_get_web_components_prompt(file_content, sys_prompt):
     print ("------GET WEB COMPONENTS-------")
     prompt = [
         {
@@ -77,7 +78,7 @@ def assemble_get_web_components_prompt(file_content):
         },
         {
             "role": "user",
-            "content": get_related_components_prompt_web_page.replace("{file_content}", file_content)
+            "content": sys_prompt.replace("{file_content}", file_content)
         }
     ]
     functions=[
@@ -164,7 +165,7 @@ def assemble_components_analysis_prompt(file_content, related_guidelines):
     
     components_analysis_content_prompt = components_analysis_content
     components_analysis_content_prompt = components_analysis_content_prompt.replace("{file_content}", file_content)
-    components_analysis_content_prompt = components_analysis_content_prompt.replace("{soft_constraints}", get_soft_constraints(related_guidelines))
+    # components_analysis_content_prompt = components_analysis_content_prompt.replace("{soft_constraints}", get_soft_constraints(related_guidelines))
     components_analysis_content_prompt = components_analysis_content_prompt.replace("{hard_constraints}", get_hard_constraints(related_guidelines))
 
     prompt =[
@@ -214,19 +215,52 @@ async def analysis_components(ctx, comp_guidelines):
     folder_name = ctx.file_name.split(".")[0]
     log_file = os.path.join(folder_name, "components.log")
 
-    # get web components
-    get_web_components_prompt, web_components_schema = assemble_get_web_components_prompt(ctx.file_content)
-    completion = await get_response(get_web_components_prompt, web_components_schema)
-    # print(completion)
+    # get web simpler components
+    get_web_components_prompt, web_components_schema = assemble_get_web_components_prompt(ctx.file_content, get_related_components_prompt_web_page_simpler)
+    completion_simpler = await get_response(get_web_components_prompt, web_components_schema, model="gpt-4-turbo-2024-04-09")
+    print(completion_simpler)
+    completion_simpler_list = list(json.loads(completion_simpler)['components'])
+    if len(completion_simpler_list) >= 10:
+        get_web_components_prompt.append(
+        {
+            "role": "user",
+            "content": "Don't include all the components! Only the most relevant ones in the webpage."
+        }
+        )
+        completion_simpler = await get_response(get_web_components_prompt, web_components_schema, model="gpt-4-turbo-2024-04-09")
+        print("second try",completion_simpler)
+        completion_simpler_list = list(json.loads(completion_simpler)['components'])
     with open(log_file, "a") as file:
-        file.write(completion + "\n")
+        file.write("simpler components" + completion_simpler + "\n")
+
+
+    get_web_components_prompt, web_components_schema = assemble_get_web_components_prompt(ctx.file_content, get_related_components_prompt_web_page_complex)
+    completion_complex = await get_response(get_web_components_prompt, web_components_schema, model="gpt-4-turbo-2024-04-09")
+    print(completion_complex)
+    completion_complex_list = list(json.loads(completion_complex)['components'])
+    if len(completion_complex_list) >= 5:
+        get_web_components_prompt.append(
+        {
+            "role": "user",
+            "content": "Don't include all the components! Only the most relevant ones."
+        }
+        )
+        completion_complex = await get_response(get_web_components_prompt, web_components_schema, model="gpt-4-turbo-2024-04-09")
+        print("second try",completion_complex)
+        completion_complex_list = list(json.loads(completion_complex)['components'])
+        if len(completion_complex_list) >= 15:
+            completion_complex_list = []
+        with open(log_file, "a") as file:
+            file.write("complex components" + completion_complex + "\n")
+            
+    components_lists = completion_simpler_list  + completion_complex_list
 
     # get library components
-    get_library_components_prompt, lib_components_schema = assemble_get_library_components_prompt(str(completion), components_list)
-    completion = await get_response(get_library_components_prompt, lib_components_schema)
-    # print(completion)
+    get_library_components_prompt, lib_components_schema = assemble_get_library_components_prompt(str(components_lists), components_list)
+    completion = await get_response(get_library_components_prompt, lib_components_schema, model="gpt-4-turbo-2024-04-09")
+    print(completion)
     with open(log_file, "a") as file:
-        file.write(completion + "\n")
+        file.write("library components" + completion + "\n")
 
     # extract components
     my_list = []
@@ -235,7 +269,9 @@ async def analysis_components(ctx, comp_guidelines):
         my_list = list(set(completion_json['components'])) # remove duplicates
     else:
         raise Exception("No components found in results")
-    # print(my_list)
+    print(my_list)
+    with open(log_file, "a") as file:
+        file.write("simpler components" + completion + "\n")
 
     # get related components guidelines
     related_guidelines = get_related_comp_guidelines(my_list, comp_guidelines, components_list)
@@ -243,7 +279,8 @@ async def analysis_components(ctx, comp_guidelines):
     # get components analysis prompt
     components_analysis_prompt, components_analysis_schema = assemble_components_analysis_prompt(ctx.file_content, related_guidelines)
     # print(components_analysis_prompt)
-    completion = await get_response(components_analysis_prompt, components_analysis_schema, 0.2)
+    # completion = await get_response(components_analysis_prompt, components_analysis_schema, 0.2)
+    completion = await get_response(components_analysis_prompt, components_analysis_schema)
     # print(completion)
     with open(log_file, "a") as file:
         file.write(completion + "\n")
