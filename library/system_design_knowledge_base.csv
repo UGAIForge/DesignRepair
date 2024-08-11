@@ -789,3 +789,113 @@ Primary fixed for a FAB container color
 Primary fixed dim for an icon button container"
 Styles,Color,Color,hard,Fixed accent colors,"Don’t,Similar to container roles, fixed colors do not pass minimum contrast requirements such as 3:1 for non-text contrast and 4.5:1 for text contrast. They should not be applied to elements requiring such contrast."
 Styles,Color,Color,hard,Fixed accent colors,"Do,Use the primary, secondary, and tertiary roles for accent colors where minimum contrast is required"
+Styles,Shape,all elements,soft,Shape scale,"The scale is a range of seven corner shape styles defining the amount of cut or roundedness: None, extra small, small, medium, large, extra large, and full.
+
+Each role in the scale defines two things:
+
+Shape family (rounded or cut)
+Value
+By default all roles use the rounded shape family. Most values are expressed in absolute dp measurements, except for the full style which is expressed in percentage.
+
+Apply shape styles using tokens
+
+Shape scale showing all 7 levels for rounded and cut corner styles
+None 
+Extra small 
+Small 
+Medium
+Large 
+Extra large
+Full"
+Styles,Shape,all elements,soft,Baseline shapes,"By default, every component is mapped to one of the seven shape styles.
+Shape style
+Component
+None
+Banners
+Bottom app bars
+Full-screen dialogs
+Lists
+Navigation bars
+Navigation rails
+Progress indicators
+Search view (full-screen)
+Side sheets (docked)
+Tabs
+Top app bars
+Extra small
+Autocomplete menu
+Select menu
+Snackbars
+Standard menu
+Text fields
+Small
+Chips
+Rich tooltip
+Medium
+Cards
+Small FABs
+Large
+Extended FABs
+FABs
+Navigation drawers
+Extra large
+Bottom sheets (docked)
+Dialogs
+Floating sheets
+Large FABs
+Search view (docked)
+Time picker
+Time input
+Full
+Badge
+Buttons
+Icon buttons
+Sliders
+Switches
+Search bar"
+Styles,Shape,all elements,soft,Symmetry,"Components can have either symmetric or asymmetric corner shapes. Symmetric shapes have the same values for all corners, while asymmetric shapes can have corners with different values. A shape token that ends with a “directional modifier” – such as top, bottom, start, or end – is always asymmetrical.
+4 shapes illustrating symmetrical and asymmetrical styles
+Extra small top  
+Large top 
+Extra large top
+Large end
+Tokens for asymmetrical shapes include a “directional modifier” like top, bottom, start, or end."
+Styles,Shape,all elements,soft,Shape family,"Components can have one of two shape families:
+Rounded corners
+Cut corners
+rounded shape and cut corner shape
+Rounded corner
+Cut corner"
+Styles,Shape,all elements,soft,Customizing shapes For a style,"You can customize the shape family and size of any style level in the shape scale. Such changes affect all components mapped to that shape style, except for those with an override.
+Customizing the corner size of the Medium style applies the change to all components using this style, such as cards and small FABs"
+Styles,Shape,all elements,soft,For a specific component,"You can change the style level that a component is mapped to.
+For example, by default, buttons are mapped to the shape style “full.” If your product requires a smaller amount of roundedness, it can be remapped to the small or medium style in shape scale.
+Remapping the button shape to a different style applies the change to all buttons in the UI"
+Styles,Shape,all elements,hard,Shape family,"Caution,To avoid unintended results, consider the choice of shape family and size in tandem with a component's layout and content"
+Styles,Icon,Icon,hard,Design principles,"Do,Simplify icons for greater clarity and legibility"
+Styles,Icon,Icon,hard,Design principles,"Don’t,Don’t be overly literal. Avoid complex icons."
+Styles,Icon,Icon,hard,Design principles,"Do,Make icons graphic and bold"
+Styles,Icon,Icon,hard,Design principles,"Don’t,Don’t use delicate or loose organic shapes"
+Styles,Icon,Icon,hard,Design principles,"Do,Use and maintain a consistent visual style throughout one icon set"
+Styles,Icon,Icon,hard,Design principles,"Don’t,Avoid mixing styles for one icon set"
+Styles,Icon,Icon,hard,Design Icon sizes and layout,"Do,Icon content is limited to the 20dp x 20dp live area, with 2dp of padding around the perimeter"
+Styles,Icon,Icon,hard,Design Icon sizes and layout,"Caution,If additional visual weight is needed, content may extend into the padding between the live area and the trim area"
+Styles,Icon,Icon,hard,Design Icon sizes and layout,"Don’t,No parts of the icon should extend outside of the trim area"
+Styles,Icon,Icon,hard,Design Grid and keyline shapes,"Do,Position icons “on pixel” within the icon grid"
+Styles,Icon,Icon,hard,Design Grid and keyline shapes,"Don’t,Don’t place the icon on a coordinate that isn’t 'on pixel'"
+Styles,Icon,Icon,hard,Design Icon metrics,"Caution,Overly round corners reduces the symbol’s legibility"
+Styles,Icon,Icon,hard,Design Icon metrics,"Don’t,Don’t use inconsistent corner radii"
+Styles,Icon,Icon,hard,Design Weight and stroke,"Don’t,Don’t use inconsistent stroke weights or rounded stroke terminals"
+Styles,Icon,Icon,hard,Design Weight and stroke,"Do,Use consistent stroke weights and squared stroke terminals"
+Styles,Icon,Icon,hard,Design Complex icon shapes,"Don’t,Don’t tilt, rotate, or make icons appear dimensional"
+Styles,Icon,Icon,hard,Design Complex icon shapes,"Do,Make icons face forward"
+Styles,Icon,Icon,hard,Applying icons Customizing Symbols,"Do,Apply weights consistently"
+Styles,Icon,Icon,hard,Applying icons Customizing Symbols,"Don’t,Don't use the lightest weight for standard-size (24dp) icons. The minimum weight for the size is 200."
+Styles,Icon,Icon,hard,Applying icons Customizing Symbols,"Caution,Be careful using excessive weight for standard 24dp symbols"
+Styles,Icon,Icon,hard,Applying icons Customizing Symbols,"Don’t,Don’t mix different weights"
+Styles,Icon,Icon,hard,Applying icons Using symbols with typography,"Don’t,Don’t use the different weights for Material Symbols and text"
+Styles,Icon,Icon,hard,Applying icons Using symbols with typography,"Do,Use the same weight for Material Symbols and Google Sans family text"
+Styles,Icon,Icon,hard,Applying icons Using symbols with typography,"Don’t,Don’t use the same baseline for Material Symbols and text"
+Styles,Icon,Icon,hard,Applying icons Using symbols with typography,"Do,Shift down the baseline of symbols to approximately 11.5% of the type size"
+Styles,Icon,Icon,hard,Applying icons Accessibility,"Caution,Use caution if icons are displayed without labels. Icon meaning should always be unambiguous and accessible for all users. Text labels can be omitted in specific circumstances where reduced visual impact is necessary."
+Styles,Icon,Icon,hard,Applying icons Accessibility,"Do,Label text provides short descriptions, especially useful for navigation"
