@@ -149,12 +149,11 @@ python test_multi.py
 
 ## Citation
 ```
-@inproceedings{yuan2024designrepair,
+@article{yuan2024designrepair,
   title={DesignRepair: Dual-Stream Design Guideline-Aware Frontend Repair with Large Language Models},
-  author={Yuan, Mingyue and Chen, Jieshan and Xing, Zhenchang and Quigley, Aaron and Luo, Yuyu and Mohammadi, Gelareh and Lu, Qinghua and Zhu, Liming},
-  booktitle={2025 IEEE/ACM 47th International Conference on Software Engineering (ICSE)},
-  year={2025},
-  organization={IEEE}
+  author={Yuan, Mingyue and Chen, Jieshan and Xing, Zhenchang and Quigley, Aaron and Luo, Yuyu and Luo, Tianqi and Mohammadi, Gelareh and Lu, Qinghua and Zhu, Liming},
+  journal={arXiv preprint arXiv:2411.01606},
+  year={2024}
 }
 ```
 
